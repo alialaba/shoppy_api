@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express()
+const authRoute = require("./routes/auth")
 
 app.use(express.json())// express body parser
 
@@ -8,7 +9,7 @@ app.use(express.json())// express body parser
 
 
 //all routes
-
+app.use("/api/auth", authRoute)
 
 //home route 
 app.get("/", (req,res)=>{
