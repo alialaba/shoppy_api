@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express()
 const authRoute = require("./routes/auth")
+const errorHandler = require("./middleware/error");
 
 app.use(express.json())// express body parser
-
 
 
 
@@ -24,5 +24,10 @@ app.get("/", (req,res)=>{
 app.use("*", (req,res)=>{
 return res.status(404).json({message: "Page not found"})
 })
+
+
+// Error handler (should be last piece of middleware);
+app.use(errorHandler)
+
 
 module.exports = app
