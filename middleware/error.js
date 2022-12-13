@@ -7,7 +7,7 @@ const errorHandler =(err, req,res, next)=>{
     let error = {...err};
     error.message = err.message
 
-    console.log(err)
+    // console.log(err)
 
     // in mongoose 1100 means duplicate error key;
     if(err.code === 1100){

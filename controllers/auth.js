@@ -9,7 +9,9 @@ const {firstname, lastname, username, password, email} =  req.body;
 try {
     const user = await User.create({firstname, lastname, username, password, email});
 
-    return res.status(201).json({success: true, user:user });
+    //refactor code because is same with login response but different status code
+    // return res.status(201).json({success: true, token:"3u481929ser" });
+    sendToken(user, 201, res)
 } catch (error) {
     next(error);
 }
@@ -41,8 +43,9 @@ exports.login = async (req,res,next)=>{
         // res.status(404).json({success: false, error: "Invalid creditials"})
         return next(new ErrorResponse("Invalid creditials", 401))
     }
-    
-    res.status(200).json({ success: true, token: "rhety4hbnbewbwvbwm"})
+     //refactor code because is same with login response but different status code
+    // res.status(200).json({ success: true, token: "rhety4hbnbewbwvbwm"})
+    sendToken(user, 200, res)
    } catch (error) {
     // res.status(500).json({success: false, error: error.message})
     next(error)
@@ -57,3 +60,14 @@ exports.forgotpassword = (req,res,next)=>{
 exports.resetpassword = (req,res,next)=>{
     res.send("resetpassword route")
 }
+
+//user : hold email & password 
+const sendToken = (user,statusCode,res )=>{
+    const token = user.getSignedToken();
+   res.status(statusCode).json({success:true, token})
+
+}
+
+/* generate token with this */
+// 1. run node
+// 2. run require("crypto").randomBytes(35).toString("hex").

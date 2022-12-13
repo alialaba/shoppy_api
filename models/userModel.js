@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -55,6 +57,12 @@ UserSchema.methods.isValidPassword = async function(password) {
     return compare;
   }
 
+
+//you will need token to get signed in.
+UserSchema.methods.getSignedToken = function(){
+//acept payload && secretOrprivatekey && options
+ return jwt.sign({id: this._id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRE})
+}
 
 const User = mongoose.model("users", UserSchema);
 
