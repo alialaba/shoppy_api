@@ -1,15 +1,22 @@
 const express = require("express");
 const app = express()
 const authRoute = require("./routes/auth")
+const privateRoute = require("./routes/private");
 const errorHandler = require("./middleware/error");
+const cors = require('cors')
+
 
 app.use(express.json())// express body parser
+
+app.use(cors())
 
 
 
 
 //all routes
-app.use("/api/auth", authRoute)
+app.use("/api/auth", authRoute);
+//protected route
+app.use("/api/private", privateRoute);
 
 //home route 
 app.get("/", (req,res)=>{

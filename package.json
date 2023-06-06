@@ -7,13 +7,16 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js --ignore './client/'"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.7.5"
+    "mongoose": "^6.7.5",
+    "nodemailer": "^6.8.0",
+    "nodemailer-mailgun-transport": "^2.1.5"
   }
 }
